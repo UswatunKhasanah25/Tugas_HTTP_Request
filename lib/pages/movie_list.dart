@@ -11,7 +11,7 @@ class _MovieListState extends State<MovieList> {
   int moviesCount;
   List movies;
   HttpService service;
-  final String imgPath = 'https://image.tmdb.org/t/p/w500/';
+  String imgPath = 'https://image.tmdb.org/t/p/w500/';
 
   Future initialize() async {
     movies = [];
@@ -32,6 +32,7 @@ class _MovieListState extends State<MovieList> {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: Text("Popular Movies"),
       ),
@@ -39,26 +40,41 @@ class _MovieListState extends State<MovieList> {
         itemCount: (this.moviesCount == null) ? 0 : this.moviesCount,
         itemBuilder: (context, int position) {
           return Card(
-            color: Colors.white,
-            elevation: 2.0,
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundImage: NetworkImage(imgPath + movies[position].posterPath),
-              ),
-              title: Text(movies[position].title),
-              subtitle: 
-              Text('Rating = ' + movies[position].voteAverage.toString(),
-              ),
-              onTap: () {
-                MaterialPageRoute route = MaterialPageRoute (
-                  builder: (_) => MovieDetail(movies[position]));
-                Navigator.push(context, route);
-              },
-            )
+            color: Colors.black,
+            elevation: 3.0,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    height: 150,
+                    child: Image.network(imgPath + movies[position].posterPath),
+                  )
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text(movies[position].title,
+                      style: TextStyle(color: Colors.white, fontSize: 25)),
+                    subtitle: Row(
+                      children: [
+                        Icon(Icons.star_rate_rounded, size: 30, color: Colors.yellow),
+                        Text(movies[position].voteAverage.toString(), 
+                          style: TextStyle(color: Colors.yellow, fontSize: 25),
+                          ),
+                      ],
+                    ),
+                    onTap: () {
+                      MaterialPageRoute route = MaterialPageRoute (
+                       builder: (_) => MovieDetail(movies[position]));
+                      Navigator.push(context, route);
+                    },    
+                 ),
+                ),
+              ]
+            ),
           );
         },
       ),
     );
-}
+  }
 }

@@ -17,26 +17,36 @@ class MovieDetail extends StatelessWidget {
     }
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text(movie.title),
+        title: Text("Movie Detail"),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
+       child: Center(
+         child: Column(
+           children: [
+             Container(
                 padding: EdgeInsets.all(16),
                 height: height / 1.5,
+                color: Colors.black,
                 child: Image.network(path)
               ),
+              
               Container(
-                child: Text(movie.overview),
-                padding: EdgeInsets.only(left: 16, right: 16),
-              )
-            ],
-          ),
-        ),
-      ),
+                padding: EdgeInsets.all(10),
+                alignment: Alignment.center,
+                color: Colors.black,
+                child: Column(
+                  children: [
+                    Text(movie.title, style: TextStyle(color: Colors.white, fontSize: 35),),
+                    Text(movie.overview, style: TextStyle(color: Colors.white, fontSize: 20),),
+                  ]
+                ),
+                )
+           ]
+         )
+           ), 
+      )
     );
   }
 }
