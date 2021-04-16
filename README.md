@@ -3,7 +3,7 @@
 HTTP Request
 
 ## Halaman List
-![screenshot](images/list.jpeg)
+![screenshot](image/list.jpeg)
 
 ## Halaman Detail
-![screenshot](images/detail.jpeg)
+![screenshot](image/detail.jpeg)
